@@ -1,0 +1,19 @@
+import "./Loop_kernel" as Kernel
+
+exposing (Program, RunningProgram)
+exposing (program)
+
+type alias Program model msg action = {
+    initialModel: model,
+    update: msg -> model -> (msg -> void) -> model,
+    action: model -> (msg -> void) -> action
+}
+
+type alias RunningProgram model msg action = {
+    program: Program model msg action,
+    send: msg -> void
+}
+
+program: Program model msg action -> RunningProgram model msg action
+program program_ =
+    Kernel.program program_
